@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+
+        <title>AplikacjaMobilna</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
+        <!-- <script src="scripts/ewa.js"></script> -->
+        <script src="scripts/jquery-1.8.0.min.js"></script>
+        <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+
+        <div data-role="page" id="pageMain">
+            <div data-role="header" class="header">
+                <h1 id="app-title">Challenge App</h1>
+            </div>
+            <div id="divMain" data-role="main" class="ui-content">
+                <a href="#pageAbout" class="ui-btn">About...</a>
+                <a href="#dlgNazwa" class="ui-btn" >Create challenge</a>
+                <a href="#dlgLista" class="ui-btn">Take the challenge</a>
+                
+                <div id="testMsg" class="not-displayed">
+                    ..
+                </div>
+
+                <!-- <input type="button" id="driver" value="load data" /> -->
+            </div>
+            <footer data-role="footer" data-position="fixed">
+                <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+            </footer>
+        </div>
+
+        <div data-role="page" id="pageAbout">
+            <div data-role="header" class="header">
+                <h1 id="app-title">Challenge App</h1>
+            </div>
+            <div id="divMain" data-role="main" class="ui-content">
+                <p>Tekst dlugi o programie, reguly etc.</p>
+                <a href="#pageMain" class="ui-btn">Ok</a>
+            </div>
+            <footer data-role="footer" data-position="fixed">
+                <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+            </footer>
+        </div>
+
+        <div data-role="page" data-dialog="true" id="dlgNazwa">
+            <div id="divMain" data-role="dialog" class="ui-content">
+                <form action="#pageCreate">
+                    <label for="nazwaChallenge">Name your challenge:</label>
+                    <input id="nazwaChallenge" name="nazwaChallenge" required onchange="spanName.innerText=nazwaChallenge.value" /> <!-- "challengeNameCrt.value = nazwaChallenge.value" /> -->
+                    <!-- <button id="nazwaOK" data-role="button" data-icon="home" class="ui-btn ui-btn-inline">OK</button>-->
+                    <a href="#pageCreate" class="ui-btn ui-btn-inline" data-icon="plus">Ok</a>
+                    <a href="#pageMain" class="ui-btn ui-btn-inline" data-icon="home">Cancel</a>
+                </form>
+
+            </div>
+        </div>
+
+<script>
+    function dlgAddClick() {
+        sInnHtml = listaPktCreate.innerHTML;
+        sInnHtml += "<li>"
+        sInnHtml += addPointDescr.value;
+        sInnHtml += " ("
+        sInnHtml += addPointGPS.innerText;
+        sInnHtml += ")</li>"
+        listaPktCreate.innerHTML = sInnHtml;
+    }
+</script>
+        <div data-role="page" data-dialog="true" id="dlgAddPoint">
+            <div id="divMain" data-role="dialog" class="ui-content">
+                <p>Dodaj punkt</p>
+                <form>
+                    <p>Current GPS value:</p>
+                    <div id="addPointGPS">....</div>
+                    <label for="addPointDescr">Description:</label>
+                    <input id="addPointDescr" name="addPointDescr" required  />
+                    <a href="#pageCreate" id="OKgps" class="ui-btn ui-btn-inline" onclick="dlgAddClick()">Ok</a>
+                    <a href="#pageCreate" class="ui-btn ui-btn-inline">Cancel</a>
+                </form>
+
+            </div>
+        </div>
+
+        <script>
+            function dlgCrtSend() {
+                sTxt = "Challenge v0.1, " + nazwaChallenge.value + "\n";
+                sTxt += listaPktCreate.innerText;
+                //alert(sTxt);
+                dlgListaSendBody.value = sTxt;
+   
+    }
+
+            function dlgGetGPS() {
+                //Call the Cordova Geolocation API
+
+                navigator.geolocation.getCurrentPosition(onGetLocationSuccess); // , onGetLocationError,  { enableHighAccuracy: true });
+                OKgps.disabled = true;
+
+            }
+
+            function onGetLocationSuccess(position) {
+                //Retrieve the location information from the position object
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                addPointGPS.innerText = latitude + " " + longitude;
+
+            }
+
+        </script>
+
+        <div data-role="page" id="pageCreate">
+            <div data-role="header" class="header">
+                <h1 id="app-title">Challenge App</h1>
+            </div>
+            <div id="divMain" data-role="main" class="ui-content">
+                <p>Challenge: <span id="spanName">.</span></p>
+                <p>Points of challenge:</p>
+                <ol id="listaPktCreate">
+                </ol>
+                <form>
+                    <a href="#dlgAddPoint" class="ui-btn ui-btn-inline" onclick="dlgGetGPS()">Add point</a>
+                    <a href="#pageMain" class="ui-btn ui-btn-inline">Cancel</a>
+                    <a href="#dlgListaSend" class="ui-btn ui-btn-inline" onclick="dlgCrtSend()">Ok</a>
+                </form>
+
+            </div>
+            <footer data-role="footer" data-position="fixed">
+                <h4>duzo roboty</h4>
+            </footer>
+        </div>
+
+        <div data-role="page" data-dialog="true" id="dlgListaSend">
+            <div id="divMain" data-role="dialog" class="ui-content">
+                <form>
+                    <label for="punktyLista">Send this to friend:</label>
+                    <textarea id="dlgListaSendBody" name="dlgListaSendBody" required rows="6"></textarea>
+                    <a href="#pageMain" class="ui-btn ui-btn-inline">Home</a>
+                </form>
+
+            </div>
+        </div>
+
+            <div data-role="page" data-dialog="true" id="dlgLista">
+                <div id="divMain" data-role="dialog" class="ui-content">
+                    <form>
+                        <label for="punktyLista">Wklej tekst challenge:</label>
+                        <textarea id="challenge-points" name="punktyLista" required rows="6" onchange="alert('ala')"></textarea>
+                        <a href="#pageTake" class="ui-btn ui-btn-inline">Ok</a>
+                        <a href="#pageMain" class="ui-btn ui-btn-inline">Cancel</a>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div data-role="page" id="pageTake">
+                <div data-role="header" class="header">
+                    <h1 id="app-title">Challenge App</h1>
+                </div>
+                <div id="divMain" data-role="main" class="ui-content">
+                    <p>formatka podjecia</p>
+                </div>
+                <footer data-role="footer" data-position="fixed">
+                    <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+                </footer>
+            </div>
+
+
+
+
+</body >
+</html >
