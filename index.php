@@ -1,4 +1,12 @@
+<?php 
+include"funkcjephp.php";
+$zalogowanyuser="anonimowy";
+
+?>
+
+
 <!DOCTYPE html>
+
 <html>
     <head>
     <!--
@@ -17,7 +25,6 @@
         <link href="css/themes/1/jquery.mobile.icons.min.css" rel="stylesheet" />
         <link href="../../lib/jqm/1.4.4/jquery.mobile.structure-1.4.4.min.css" rel="stylesheet" />
 
-
         <title>MobileApp</title>
     </head>
     <body>
@@ -28,12 +35,13 @@
         <script src="scripts/jquery-1.8.0.min.js"></script>
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
 
-
         <div data-role="page" id="pageMain">
             <div data-role="header" class="header">
-                <h1 id="app-title">Challenge App</h1>
+                <h1>Challenge App</h1>
             </div>
+			
             <div id="divMain" data-role="main" class="ui-content">
+					<?php d_usr($zalogowanyuser) ?>
                 <h2 class="mc-text-center">Welcome!</h2>
                 <a href="#pageAbout" class="ui-btn">About...</a>
                 <p class="mc-top-margin-1-5"><b>Existing Users</b></p>
@@ -42,7 +50,7 @@
                 <a href="#dlgSignUp" class="ui-btn ui-btn-b ui-corner-all">Sign Up</a>
             </div>
             <footer data-role="footer" data-position="fixed">
-                <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+                <p>&copy; Copyright Ewa Kołodziejczyk & DJ_LKP & trochę Kornel 2017</p>
             </footer>
         </div>
 
@@ -51,18 +59,37 @@
                 <h1 id="app-title">Challenge App</h1>
             </div>
             <div id="divMain" data-role="main" class="ui-content">
-                <p>Tekst dlugi o programie, reguly etc.</p>
+                <p>Test pobierania tabel z bazy:</p>
+				<p><?php
+					
+					print"<br> userowie";
+					$zapytanie="select * from users";
+					wd($con, $zapytanie);
+					print"<br>czelendże <br>";
+					$zapytanie="select * from challanges";
+					wd($con, $zapytanie);
+					print"<br> przypisania <br>";
+					$zapytanie="select * from us_ch";
+					wd($con, $zapytanie);
+					?>
+				</p>
+				
+				<p> 
+					Dane serwera PHP: </br>
+					<?php  phpinfo() ?>
+				</p>
                 <a href="#pageMain" class="ui-btn">Ok</a>
             </div>
             <footer data-role="footer" data-position="fixed">
-                <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+                <p>&copy; Copyright Ewa Kołodziejczyk & DJ_LKP & trochę Kornel 2017</p>
             </footer>
         </div>
 
         <div data-role="page" data-dialog="true" id="dlg-right-credentials">
             <div data-role="header">
         <a href="#pageMain" data-direction="reverse" class="ui-btn-left ui-btn  ui-btn-icon-notext ui-corner-all ui-icon-back">Back</a>
-                <h3>Challenge App</h3>
+                <h1>Challenge App</h1>
+				<?php d_usr($zalogowanyuser) ?>
                 <p class="mc-top-margin-1-5">If you are ready make a choice you must click to the right-hand or left-hand corner</p>
                 <a href="#popupNested" data-rel="popup" class="ui-btn-right ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bullets" data-transition="pop"></a>
                 <!--<a href="#pageMain" data-direction="reverse" class="ui-btn-left ui-btn ui-btn-icon-notext ui-corner-all ui-icon-back">Back</a> -->
@@ -448,7 +475,7 @@ Wieliczka, Kraków, Zabierzów
                     </form>
                 </div>
                 <footer data-role="footer" data-position="fixed">
-                    <p>&copy; Copyright Ewa Kołodziejczyk 2017</p>
+                    <p>&copy; Copyright Ewa Kołodziejczyk & LKP & troche Kornel 2017</p>
                 </footer>
             </div>
 

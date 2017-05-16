@@ -1,3 +1,9 @@
+<?php 
+include"funkcjephp.php";
+$zalogowanyuser="anonimowy";
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +57,10 @@
                 <h1 id="app-title">Challenge App</h1>
             </div>
             <div id="divMain" data-role="main" class="ui-content">
-                <p>Tekst dlugi o programie, reguly etc.</p>
+			
+			
+			
+			
                 <a href="#pageMain" class="ui-btn">Ok</a>
             </div>
             <footer data-role="footer" data-position="fixed">
