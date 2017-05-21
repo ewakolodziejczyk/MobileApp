@@ -224,7 +224,7 @@ Challenge App to aplikacja, która pozwala rzucać wyzwania Twojemu rodzeństwu,
             } /* This code uses the device's geolocation capability to get the latitude and longitude of the device's location. It then uses that information to query the App for current conditions for the current location. */
 			
 			function filtrKoordynat(str){
-			  objReg = /[1234567890,.\n)]/;
+			  objReg = /[1234567890,.\n]/;
 			  var arr = str.split("");
 			  var str_return = "";
 			  for ( var i=0; i<arr.length; i++){
@@ -303,7 +303,7 @@ Wieliczka, Kraków, Zabierzów
                 
                 var sTxt = filtrKoordynat(punktyLista.value);
                 //var aArr = sTxt.split("\n");
-		 var aArr = sTxt.split(")");
+		 var aArr = sTxt.split("\n");
                 //if(aArr.length<2) return;
                 
                 
