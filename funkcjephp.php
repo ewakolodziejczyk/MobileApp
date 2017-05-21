@@ -27,4 +27,27 @@ function d_usr($zalogowanyuser){
 	
 }
 
+function komendasql($con,$komenda){
+	$r=pg_exec($con,$komenda);
+	
+}
+
+if(isset($_GET['akcja']))
+{
+	$komenda="delete from users where surname = 'nazwisko';";
+	komendasql($con,$komenda);
+}
+
+if(isset($_GET['generuj']))
+{							
+	$userId=(time()-1000000000);
+	$userName='???';
+	$userSurname='nazwisko';
+	$mail='adrespoczty';
+	$pass='haselko';
+	$komenda="INSERT INTO users VALUES ({$userId}, '{$userName}', '{$userSurname}', '{$mail}', '{$pass}');";
+	komendasql($con,$komenda);
+	print $komenda;
+}
+								
 ?>

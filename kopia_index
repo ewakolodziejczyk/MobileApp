@@ -221,13 +221,9 @@
 			  }
 			  return str_return;
 			}
-			
-			
+            // function will clear input elements on ever form on HTML page
+
         </script>
-		
-		
-		
-		
 
         <div data-role="page" id="pageCreate">
             <div data-role="header" class="header">
@@ -257,12 +253,9 @@
                 <form>
                     <h3 class="mc-text-center" for="dlgListaSendBody">Send this to friend</h3>
                     <textarea id="dlgListaSendBody" name="dlgListaSendBody" required rows="6"></textarea>
-					Frend's mail:
-					<textarea id="mailkolegi" name="mailkolegi" required rows="1"></textarea>
-					<input type="button" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5" onclick="location.href=&quot;mailto:&quot;+document.getElementById(&quot;mailkolegi&quot;).value+&quot;?subject=Nowe wyzwanie&body=&quot;+document.getElementById(&quot;dlgListaSendBody&quot;).value+&quot;                   Skopiuj powyższy tekst i wklej na stronie: http://v-ie.uek.krakow.pl/~s182919/#dlgLista&quot; " value="Send">
                     <a href="#pageMain" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5"><center>Home</center></a>
-					
-				</form>
+                    <a href="mailto:" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">Send</a> 
+                </form>
             </div> <!-- /content -->
         </div> <!--/ page -->
 
@@ -449,7 +442,7 @@ Wieliczka, Kraków, Zabierzów
                     <form>
                         <label for="punktyLista"><b>Paste the text challenge:</b></label>
                         <textarea id="punktyLista" name="punktyLista" required rows="6"></textarea>
-                        <a href="#pageTake" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5" onclick="initMap()">Ok</a>
+                        <a href="#pageTake" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">Ok</a>
                         <a href="#pageMain" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">Cancel</a>
                     </form>
                 </div>
